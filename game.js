@@ -9,19 +9,62 @@ var jumpButton;
 var text;
 var winningMessage;
 var won = false;
-var currentScore = 90;
+var currentScore = 10;
 var winningScore = 100;
 
 // add collectable items to the game
 function addItems() {
   items = game.add.physicsGroup();
-  createItem(375, 300, 'coin');
+  createItem(23, 77, 'coin');
+  createItem(389, 475, 'coin');
+  createItem(131, 545, 'coin');
+  createItem(732, 304, 'coin');
+  createItem(93, 182, 'coin');
+  createItem(181, 114, 'coin');
+  createItem(264, 400, 'coin');
+  createItem(436, 315, 'coin');
+  createItem(540, 490, 'coin');
+  createItem(140, 550, 'poison');
+  createItem(140, 525, 'poison');
+  createItem(140, 500, 'poison');
+  createItem(140, 475, 'poison');
+  createItem(115, 475, 'poison');
+  createItem(90, 475, 'poison');
+  createItem(65, 475, 'poison');
+  createItem(240, 570, 'poison');
+  createItem(240, 390, 'poison');
+  createItem(240, 240, 'poison');
+  createItem(760, 570, 'poison');
+  createItem(760, 545, 'poison');
+  createItem(760, 520, 'poison');
+  createItem(760, 495, 'poison');
+  createItem(760, 470, 'poison');
+  createItem(760, 445, 'poison');
+  createItem(760, 420, 'poison');
+  createItem(760, 395, 'poison');
+  createItem(760, 370, 'poison');
+  createItem(690, 190, 'poison');
+  createItem(400, 300, 'poison');
+  createItem(340, 460, 'poison');
+  createItem(490, 300, 'poison');
+  createItem(560, 420, 'poison');
+  createItem(585, 420, 'poison');
+  createItem(610, 420, 'poison');
+  createItem(635, 420, 'poison');
 }
 
 // add platforms to the game
 function addPlatforms() {
   platforms = game.add.physicsGroup();
   platforms.create(450, 450, 'platform');
+  platforms.create(500, 450, 'platform');
+  platforms.create(450, 465, 'platform');
+  platforms.create(500, 465, 'platform');
+  platforms.create(450, 480, 'platform');
+  platforms.create(500, 480, 'platform');
+  platforms.create(450, 495, 'platform');
+  platforms.create(500, 495, 'platform');
+  platforms.create(0, 0, 'platform');
   platforms.setAll('body.immovable', true);
 }
 
@@ -35,7 +78,7 @@ function createItem(left, top, image) {
 // create the winning badge and add to screen
 function createBadge() {
   badges = game.add.physicsGroup();
-  var badge = badges.create(750, 400, 'badge');
+  var badge = badges.create(500, 50, 'badge');
   badge.animations.add('spin');
   badge.animations.play('spin', 10, true);
 }
@@ -43,7 +86,16 @@ function createBadge() {
 // when the player collects an item on the screen
 function itemHandler(player, item) {
   item.kill();
-  currentScore = currentScore + 10;
+  console.log(item.key);
+  // add 10 if item is coin
+  if (item.key == "coin"){
+    currentScore = currentScore + 10;
+  // subtract 999999999999 points if item is poison
+  } else if (item.key == "poison"){
+      currentScore = -999999999999999 + " if (jumpOnCoins){return instant success};"
+      game.stage.backgroundColor = '#000000';
+  }
+
   if (currentScore === winningScore) {
       createBadge();
   }
@@ -61,7 +113,7 @@ window.onload = function () {
   
   // before the game begins
   function preload() {
-    game.stage.backgroundColor = '#5db1ad';
+    game.stage.backgroundColor = '#260026';
     
     //Load images
     game.load.image('platform', 'assets/platform_1.png');
@@ -70,6 +122,7 @@ window.onload = function () {
     game.load.spritesheet('player', 'assets/chalkers.png', 48, 62);
     game.load.spritesheet('coin', 'assets/coin.png', 36, 44);
     game.load.spritesheet('badge', 'assets/badge.png', 42, 54);
+    game.load.spritesheet('poison', 'assets/poison.png', 32, 32);
   }
 
   // initial game set up
@@ -121,7 +174,7 @@ window.onload = function () {
     }
     // when the player winw the game
     if (won) {
-      winningMessage.text = "YOU WIN!!!";
+      winningMessage.text = "How much time did you just waste?";
     }
   }
 
