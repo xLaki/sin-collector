@@ -94,6 +94,7 @@ function itemHandler(player, item) {
   } else if (item.key == "poison"){
       currentScore = -999999999999999 + " if (jumpOnCoins){return instant success};"
       game.stage.backgroundColor = '#000000';
+      player.kill();
   }
 
   if (currentScore === winningScore) {
@@ -175,6 +176,7 @@ window.onload = function () {
     // when the player winw the game
     if (won) {
       winningMessage.text = "How much time did you just waste?";
+      player.kill();
     }
   }
 
